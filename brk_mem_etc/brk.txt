@@ -64,3 +64,55 @@ main(int argc, char *argv[])
 Вызов sbrk(0) возвращает текущее значение установки крайней точки программы
 без ее изменения. Этот вызов может пригодиться, если нужно отследить размер кучи,
 возможно, чтобы изучить поведение пакета средств выделения памяти.
+
+----------malloc----------
+
+как мы определили, для выделения небольшого объема памяти он вызывает сдвиг програм брейка.
+
+Вызовем malloc несколько раз понемногу:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+/**
+ * main - many calls to malloc
+ *
+ * Return: EXIT_FAILURE if something failed. Otherwise EXIT_SUCCESS
+ */
+int main(void)
+{
+    void *p;
+
+    write(1, "BEFORE MALLOC #0\n", 17);
+    p = malloc(1024);
+    write(1, "AFTER MALLOC #0\n", 16);
+    printf("%p\n", p);
+
+    write(1, "BEFORE MALLOC #1\n", 17);
+    p = malloc(1024);
+    write(1, "AFTER MALLOC #1\n", 16);
+    printf("%p\n", p);
+
+    write(1, "BEFORE MALLOC #2\n", 17);
+    p = malloc(1024);
+    write(1, "AFTER MALLOC #2\n", 16);
+    printf("%p\n", p);
+
+    write(1, "BEFORE MALLOC #3\n", 17);
+    p = malloc(1024);
+    write(1, "AFTER MALLOC #3\n", 16);
+    printf("%p\n", p);
+
+    getchar();
+    return (EXIT_SUCCESS);
+}
+
+Посмотрев трассу системных вызовов, мы сделаем вывод, что brk не вызывается каждый раз. 
+Это как раз связано с тем, что сдвиг происходит "как бы до конца страницы". А в дальнейшем
+использует кусочки из предварительно выделенной памяти.
+
+
+cat /proc/$(process_id)/maps , [heap]
+
+
