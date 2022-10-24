@@ -115,6 +115,7 @@ int main(void)
 
 
 cat /proc/$(process_id)/maps , [heap]
+pmap -X $(process_id)
 
 -----------free-----------
 
