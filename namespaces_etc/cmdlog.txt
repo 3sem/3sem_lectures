@@ -1,2 +1,25 @@
 id
 sudo id
+PS1='\u@app-user$ ' unshare -Ur
+#Unshares the indicated namespaces from the parent process and then executes the specified program. If program is not given, then ``${SHELL}'' is run #(default: /bin/sh).
+#
+#       The namespaces can optionally be made persistent by bind mounting /proc/pid/ns/type files to a filesystem path and entered with nsenter(1) even #after the program terminates (except PID name‐
+#       spaces where permanently running init process is required).  Once a persistent namespace is no longer needed, it can be unpersisted with umount(8).  #See the EXAMPLES  section  for  more  de‐
+#       tails.
+#
+#       The namespaces to be unshared are indicated via options.  Unshareable namespaces are:
+#
+#       mount namespace
+#              
+#       UTS namespace
+#      
+#       IPC namespace
+#
+#       PID namespace
+# 
+#       cgroup namespace
+#  
+#       user namespace
+id
+sudo id
+  
