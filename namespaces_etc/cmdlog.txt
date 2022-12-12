@@ -1,6 +1,9 @@
 id
 sudo id
-PS1='\u@app-user$ ' unshare -Ur
+PS1='\u@app-user$ ' unshare -Ur # r means 'create mapping'
+
+#uid_map fields: ID-inside-ns      ID-outside-ns      range
+
 #Unshares the indicated namespaces from the parent process and then executes the specified program. If program is not given, then ``${SHELL}'' is run #(default: /bin/sh).
 #
 #       The namespaces can optionally be made persistent by bind mounting /proc/pid/ns/type files to a filesystem path and entered with nsenter(1) even #after the program terminates (except PID name‐
