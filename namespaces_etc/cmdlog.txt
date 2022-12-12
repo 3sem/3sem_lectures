@@ -26,3 +26,4 @@ PS1='\u@app-user$ ' unshare -Ur # r means 'create mapping'
 id
 sudo id
   
+https://www.redhat.com/sysadmin/building-container-namespaces
